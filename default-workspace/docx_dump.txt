@@ -1,0 +1,85 @@
+=== PARAGRAPHS ===
+[0] (Heading 1) 成员 4 完整交付物
+[1] (Normal (Web)) 项目：番茄钟 + 农场养成系统｜Godot4.x 本地客户端
+[2] (Normal (Web)) 角色：界面交互与逻辑视图设计师
+[3] (Normal (Web)) 交付项：UML 逻辑包图说明、4 个核心界面低保真线框图、《用户界面设计选型说明》、思考题 2 解答
+[5] (Heading 2) 1 UML 逻辑包图（包依赖图）
+[6] (Heading 3) 包划分
+[7] (Normal) PomodoroPackage 番茄计时包：番茄倒计时、暂停 / 放弃逻辑、计时状态、计时提醒
+[8] (Normal) FarmPackage 农场养成包：地块管理、作物生长、商店、背包、收获、道具、等级
+[9] (Normal) TaskStatsPackage 任务统计包：学习任务增删改查、标签管理、番茄记录聚合、统计报表计算
+[10] (Normal) BaseStoragePackage 基础存储包：本地 JSON 读写、配置加载、数据重置、获取系统时间
+[11] (Heading 3) 单向依赖规则（无循环依赖）
+[12] (Normal (Web)) 箭头含义：依赖包 → 被依赖包
+[13] (Normal) PomodoroPackage → BaseStoragePackage
+[14] (Normal) FarmPackage → BaseStoragePackage
+[15] (Normal) TaskStatsPackage → BaseStoragePackage
+[16] (Normal) TaskStatsPackage → PomodoroPackage（消费番茄完成事件数据）
+[17] (Normal (Web)) 重要：PomodoroPackage与FarmPackage不做直接类调用，依靠事件信号pomodoro_completed完成通信，用虚线表示事件通知，不画实线依赖； BaseStoragePackage不依赖任何上层业务包。
+[19] (Heading 2) 2 核心界面低保真线框图（4 张，文字版原型，用于绘图参考）
+[20] (Normal (Web)) 全部 PC 客户端窗口，顶部统一全局导航栏：【番茄钟 | 农场 | 统计看板 | 设置】
+[21] (Heading 3) 2.1 番茄钟倒计时主界面
+[22] (HTML Preformatted) ┌─────────────────────────────────────┐
+[23] (HTML Preformatted) │ 番茄钟 │ 农场 │ 统计看板 │ 设置        │ 全局导航
+[24] (HTML Preformatted) ├─────────────────────────────────────┤
+[25] (HTML Preformatted) │                                     │
+[26] (HTML Preformatted) │         ○  剩余 24:30               │ 大圆形倒计时
+[27] (HTML Preformatted) │      当前：工作阶段                  │
+[28] (HTML Preformatted) │  [使用默认模板]  [自定义时长设置]     │
+[29] (HTML Preformatted) │                                     │
+[30] (HTML Preformatted) │    ▷开始    ⏸暂停    ✖放弃本次番茄  │
+[31] (HTML Preformatted) │                                     │
+[32] (HTML Preformatted) │ 绑定任务 ▼ [下拉选择学习任务]        │
+[33] (HTML Preformatted) │ 提示：单次番茄最多暂停1次，超时失效   │
+[34] (HTML Preformatted) └─────────────────────────────────────┘
+[35] (HTML Preformatted) 弹窗：计时结束弹出提醒框（受音效设置控制）
+[36] (Heading 3) 2.2 农田网格（农场主页面）
+[37] (HTML Preformatted) ┌─────────────────────────────────────┐
+[38] (HTML Preformatted) │ 番茄钟 │ 农场 │ 统计看板 │ 设置        │
+[39] (HTML Preformatted) ├─────────────────────────────────────┤
+[40] (HTML Preformatted) │Lv.3｜金币：120｜经验：45/200   [商店][背包]│
+[41] (HTML Preformatted) │                                     │
+[42] (HTML Preformatted) │ □锁定 □空闲 □生长中(08:20) □成熟✨   │
+[43] (HTML Preformatted) │ □空闲 □生长中 □锁定        □空闲    │ 4×4地块网格
+[44] (HTML Preformatted) │ □成熟✨□锁定 □空闲         □生长中   │
+[45] (HTML Preformatted) │ □空闲 □空闲 □锁定         □空闲    │
+[46] (HTML Preformatted) │                                     │
+[47] (HTML Preformatted) │选中地块：小麦｜剩余生长：8分20秒 [使用道具]│
+[48] (HTML Preformatted) └─────────────────────────────────────┘
+[49] (Heading 3) 2.3 商店模态弹窗（农场内弹出）
+[50] (HTML Preformatted) ┌─────────────────────────────────────┐
+[51] (HTML Preformatted) │ 农场商店                    ×关闭    │
+[52] (HTML Preformatted) ├─种子────┬─道具────┬─装饰───────────┤
+[53] (HTML Preformatted) │小麦种子｜ 加速卡 ｜ 栅栏            │
+[54] (HTML Preformatted) │价格30金│价格50金｜价格80金          │
+[55] (HTML Preformatted) │[购买]  │[购买]  │[购买]            │
+[56] (HTML Preformatted) └─────────────────────────────────────┘
+[57] (HTML Preformatted) 规则：资源不足时【购买】按钮置灰不可点击
+[58] (Heading 3) 2.4 统计看板界面
+[59] (HTML Preformatted) ┌─────────────────────────────────────┐
+[60] (HTML Preformatted) │ 番茄钟 │ 农场 │ 统计看板 │ 设置        │
+[61] (HTML Preformatted) ├─────────────────────────────────────┤
+[62] (HTML Preformatted) │         ◀ 日视图 ▶                 │
+[63] (HTML Preformatted) │ 📊有效番茄：12个                    │
+[64] (HTML Preformatted) │ ⏱累计专注：5h12min                  │
+[65] (HTML Preformatted) │  ┌─┐┌──┐┌┐ 柱状简易图表展示每日番茄数 │
+[66] (HTML Preformatted) │  └─┘└──┘└┘                          │
+[67] (HTML Preformatted) │历史记录列表：                       │
+[68] (HTML Preformatted) │2026-10-23｜数学｜有效番茄           │
+[69] (HTML Preformatted) │2026-10-23｜英语｜无效番茄           │
+[70] (HTML Preformatted) └─────────────────────────────────────┘
+[72] (Heading 2) 3 用户界面设计选型说明
+[73] (Heading 1) 用户界面设计选型说明
+[74] (Normal (Web)) 本项目面向学生学习场景，基于 Godot4.x 开发本地富客户端 GUI 图形界面，舍弃命令行、网页 H5 方案。目标用户核心诉求为快速启动番茄计时、直观感知农场游戏化反馈、便捷查阅学习统计数据。
+[75] (Normal (Web)) 系统采用全局顶部导航，实现番茄计时页、农场页、统计看板页、设置页一键切换；页面切换不会中断后台番茄倒计时与作物离线生长计时。系统设置、高危数据操作统一收拢至【设置】页面，不分散在各业务页面内。设置页面包含提醒音效开关、音量调节、重置农场数据、重置学习统计按钮；重置类破坏性操作必须弹出二次确认弹窗，避免误触造成数据丢失。
+[76] (Normal (Web)) 番茄计时界面放大倒计时数字降低视觉干扰，提供任务绑定下拉框，界面文字提示暂停规则，明确区分开始、暂停、放弃操作。农场页面使用网格可视化地块状态，锁定、空闲、生长中、成熟地块使用不同视觉样式区分；商店采用模态弹窗，不做页面跳转割裂用户体验；页面顶部实时展示等级、资源、经验，将游戏化激励可视化。统计看板支持日 / 周维度切换，采用卡片 + 简易柱状图，将抽象学习时长、番茄数量转化为直观图表，同时保留学习历史流水记录，方便用户回溯学习情况。
+[77] (Normal (Web)) 整体设计注重防误操作：放弃番茄、重置数据均增加确认弹窗；业务不满足条件时按钮置灰禁用，避免无效交互。GUI 图形界面贴合学生用户操作习惯，交互直观，高危操作做保护，兼顾易用性与系统鲁棒性。
+[79] (Heading 2) 4 思考题 2（≥150 字，正式作答）
+[80] (Normal (Web)) 思考题 2：架构风格与架构模式如何区分？结合本项目说明 “事件驱动风格” 下如何采用 “观察者模式 / MVC” 具体落地。
+[81] (Normal (Web)) 架构风格是系统高层次整体组织约束，定义组件间交互、消息流转的宏观规则，作用于整个系统；架构模式是解决局部特定问题的可复用设计模板，用于实现子模块。简言之，架构风格决定系统整体组织形式，架构模式解决局部实现问题。
+[82] (Normal (Web)) 本系统整体采用事件驱动架构风格，业务包之间不直接调用对方内部函数，依靠信号事件传递消息。例如番茄计时完成后，番茄包发出pomodoro_completed事件，而不是直接调用农场发放奖励的函数。在此架构风格之上，使用观察者模式作为架构模式落地：农场模块、统计模块作为观察者订阅番茄完成事件；番茄模块作为被观察者，计时结束发出事件，所有订阅者接收通知，分别执行发放农场资源、写入番茄统计记录的业务，实现模块解耦。
+[83] (Normal (Web)) 同时项目引入 MVC 模式辅助 GUI 界面实现：Model 维护番茄状态、地块、任务等业务数据；View 为 GUI 视图，只负责渲染界面；Controller 接收用户点击操作，修改 Model 状态并触发事件通知 View 刷新界面。MVC 实现界面展示与业务逻辑分离，搭配事件驱动风格，修改 UI 原型无需改动计时、农场业务逻辑，便于小组并行开发。
+
+=== TABLES ===
+
+=== HEADERS/FOOTERS ===

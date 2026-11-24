@@ -1,0 +1,7 @@
+# Godot 导入缓存
+.godot/
+# 便携运行目录（存档 / 日志 / shader 缓存）
+.runtime/
+# 系统文件
+.DS_Store
+Thumbs.db

@@ -24,3 +24,11 @@ venv/
 dist/
 build/
 *.log
+
+# Godot 引擎、导入缓存与打包产物（体积大，不入库）
+tools/
+*.exe
+*.zip
+.godot/
+.godot-data/
+*.cache

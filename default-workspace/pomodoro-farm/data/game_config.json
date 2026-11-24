@@ -1,0 +1,76 @@
+{
+  "crops": [
+    {
+      "id": "wheat",
+      "name": "小麦",
+      "seed_price": 30,
+      "grow_seconds": 600,
+      "sell_price": 40,
+      "exp": 10,
+      "unlock_level": 1,
+      "color": "#e8c26a",
+      "emoji": "🌾"
+    },
+    {
+      "id": "carrot",
+      "name": "胡萝卜",
+      "seed_price": 45,
+      "grow_seconds": 1200,
+      "sell_price": 65,
+      "exp": 18,
+      "unlock_level": 2,
+      "color": "#e78f3c",
+      "emoji": "🥕"
+    },
+    {
+      "id": "strawberry",
+      "name": "草莓",
+      "seed_price": 60,
+      "grow_seconds": 1800,
+      "sell_price": 100,
+      "exp": 30,
+      "unlock_level": 3,
+      "color": "#dd5a6a",
+      "emoji": "🍓"
+    }
+  ],
+  "items": [
+    {
+      "id": "speed_card",
+      "name": "加速卡",
+      "price": 50,
+      "desc": "缩短选中地块 50% 剩余生长时间"
+    },
+    {
+      "id": "fertilizer",
+      "name": "肥料",
+      "price": 35,
+      "desc": "减少选中地块 2 分钟生长时间"
+    }
+  ],
+  "decorations": [
+    {
+      "id": "fence",
+      "name": "栅栏",
+      "price": 80,
+      "desc": "农场装点，无属性加成"
+    },
+    {
+      "id": "scarecrow",
+      "name": "稻草人",
+      "price": 120,
+      "desc": "农场装点，无属性加成"
+    }
+  ],
+  "level_base_exp": 200,
+  "level_exp_step": 100,
+  "start_coins": 120,
+  "start_plots": 6,
+  "plots_per_level": 2,
+  "max_plots": 16,
+  "reward_coins": 20,
+  "reward_exp": 15,
+  "reward_seed_chance": 0.3,
+  "focus_minutes": 25,
+  "break_minutes": 5
+}
